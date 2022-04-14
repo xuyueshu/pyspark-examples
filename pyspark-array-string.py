@@ -24,6 +24,11 @@ df2 = df.withColumn("languagesAtSchool",
 df2.printSchema()
 df2.show(truncate=False)
 
+df3 = df.withColumn("languagesAtSchool_update",
+   concat_ws("--",df.languagesAtSchool))
+df3.printSchema()
+df3.show(truncate=False)
+
 
 df.createOrReplaceTempView("ARRAY_STRING")
 spark.sql("select name, concat_ws(',',languagesAtSchool) as languagesAtSchool," + \

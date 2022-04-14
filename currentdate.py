@@ -16,8 +16,14 @@ spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
 schema = StructType([
             StructField("seq", StringType(), True)])
 
-dates = ['1']
+dates = [['1']]
 
-df = spark.createDataFrame(list('1'), schema=schema)
+df = spark.createDataFrame([list('1')], schema=schema)
+df1 = spark.createDataFrame(dates, schema=schema)
 
 df.show()
+df1.show()
+
+
+# createDataFrame()里面传的data是一个rdd模型，具有嵌套的list，相当于[[]]
+#单纯的传一个list，会报错TypeError: StructType can not accept object '1' in type <class 'str'>

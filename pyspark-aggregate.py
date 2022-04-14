@@ -37,11 +37,13 @@ print("approx_count_distinct: " + \
       str(df.select(approx_count_distinct("salary")).collect()[0][0]))
 
 print("avg: " + str(df.select(avg("salary")).collect()[0][0]))
+print("avg: " + str(df.select(avg("salary")).collect()))
+print("avg: " + str(df.select(avg("salary")).collect()[0]))
 
 df.select(collect_list("salary")).show(truncate=False)
-
+#
 df.select(collect_set("salary")).show(truncate=False)
-
+#
 df2 = df.select(countDistinct("department", "salary"))
 df2.show(truncate=False)
 print("Distinct Count of Department &amp; Salary: "+str(df2.collect()[0][0]))

@@ -4,7 +4,7 @@ author SparkByExamples.com
 """
 
 import pandas as pd    
-data = [['Scott', 50], ['Jeff', 45], ['Thomas', 54],['Ann',34]] 
+data = [['Scott', 50], ['Jeff', 45], ['Thomas', 54],['Ann',34]] ##具有嵌套的list，类似rdd的模式
   
 # Create the pandas DataFrame 
 pandasDF = pd.DataFrame(data, columns = ['Name', 'Age']) 

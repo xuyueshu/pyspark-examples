@@ -22,7 +22,7 @@ df.show(truncate=False)
 
 from pyspark.sql.functions import col,round,expr
 df.withColumn("salary",df.salary.cast('double')).printSchema()    
-df.withColumn("salary",df.salary.cast(DoublerType())).printSchema()    
+df.withColumn("salary",df.salary.cast(DoubleType())).printSchema()
 df.withColumn("salary",col("salary").cast('double')).printSchema()    
 
 #df.withColumn("salary",round(df.salary.cast(DoubleType()),2)).show(truncate=False).printSchema()    

@@ -11,7 +11,7 @@ spark = SparkSession.builder \
 
 data = [('James','Smith','M',3000),
   ('Anna','Rose','F',4100),
-  ('Robert','Williams','M',6200), 
+  ('Robert','Williams','M',6200),
 ]
 
 columns = ["firstname","lastname","gender","salary"]
@@ -21,7 +21,13 @@ df.show()
 
 if 'salary1' not in df.columns:
     print("aa")
-    
+
+print(df.columns)
+print(df.schema.fields)
+
+
+
+
 # Add new constanct column
 from pyspark.sql.functions import lit
 df.withColumn("bonus_percent", lit(0.3)) \

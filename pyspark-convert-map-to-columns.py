@@ -18,25 +18,28 @@ df = spark.createDataFrame(data=dataDictionary, schema = ['name','properties'])
 df.printSchema()
 df.show(truncate=False)
 
-df3=df.rdd.map(lambda x: \
-    (x.name,x.properties["hair"],x.properties["eye"])) \
-    .toDF(["name","hair","eye"])
-df3.printSchema()
-df3.show()
-
-df.withColumn("hair",df.properties.getItem("hair")) \
-  .withColumn("eye",df.properties.getItem("eye")) \
-  .drop("properties") \
-  .show()
-
-df.withColumn("hair",df.properties["hair"]) \
-  .withColumn("eye",df.properties["eye"]) \
-  .drop("properties") \
-  .show()
+# df3=df.rdd.map(lambda x: \
+#     (x.name,x.properties["hair"],x.properties["eye"])) \
+#     .toDF(["name","hair","eye"])
+# df3.printSchema()
+# df3.show()
+#
+# df.withColumn("hair",df.properties.getItem("hair")) \
+#   .withColumn("eye",df.properties.getItem("eye")) \
+#   .drop("properties") \
+#   .show()
+#
+# df.withColumn("hair",df.properties["hair"]) \
+#   .withColumn("eye",df.properties["eye"]) \
+#   .drop("properties") \
+#   .show()
 
 # Functions
 from pyspark.sql.functions import explode,map_keys,col
 keysDF = df.select(explode(map_keys(df.properties))).distinct()
+print(keysDF)
 keysList = keysDF.rdd.map(lambda x:x[0]).collect()
+print(keysList)
 keyCols = list(map(lambda x: col("properties").getItem(x).alias(str(x)), keysList))
+print(keyCols)
 df.select(df.name, *keyCols).show()
